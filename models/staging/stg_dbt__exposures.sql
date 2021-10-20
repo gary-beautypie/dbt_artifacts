@@ -26,7 +26,8 @@ flatten as (
         node.value:type::string as type,
         node.value:owner:name::string as owner,
         node.value:maturity::string as maturity,
-        node.value:package_name::string as package_name
+        node.value:package_name::string as package_name,
+        node.value:metadata::variant as metadata
     from manifests,
     lateral flatten(input => data:exposures) as node
 
@@ -46,7 +47,8 @@ surrogate_key as (
         type,
         owner,
         maturity,
-        package_name
+        package_name,
+        metadata
     from flatten
 
 )
